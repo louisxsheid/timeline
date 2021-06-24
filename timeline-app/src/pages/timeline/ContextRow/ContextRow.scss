@@ -1,0 +1,24 @@
+.context-bar-wrapper {
+    display: flex;
+    flex-direction: flex;
+    color: white;
+    border: 1px solid black;
+}
+
+.context-name {
+    width: 15vw;
+    background-color: darkslategray;
+    font-size: 1.5rem;
+    border: 1px solid white;
+}
+
+.item-context-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 20vh;
+    border: 1px solid black;
+    .item-name {
+        width: 15vw;
+        font-size: 1.5rem;
+    }
+}
