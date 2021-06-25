@@ -1,11 +1,15 @@
 import "./TimelinePage.scss";
 // eslint-disable-next-line no-unused-vars
 import ContextRow from "../ContextRow/ContextRow";
-import allData from "../mock-data";
 // eslint-disable-next-line no-unused-vars
 import DateRangeColumn from "../DateRange/DateRangeColumn";
+// eslint-disable-next-line no-unused-vars
+import DataShowCase from "../DataShowCase/DataShowCase";
+import { useState, useEffect } from "react";
 
-const TimelinePage = () => {
+const TimelinePage = ({ allData }) => {
+  const [showCase, setShowCase ] = useState("temp");
+  const [dateData, setDateData ] = useState("");
   const dates = [
     "6/22/2021",
     "6/23/2021",
@@ -16,6 +20,19 @@ const TimelinePage = () => {
     "6/28/2021",
     "6/29/2021"
   ];
+
+  useEffect(() => {
+    let temp = [];
+    for(let context of allData) {
+      for(let data of context.data) {
+        if(data.date == showCase) {
+          temp.push(data);
+        }
+      }
+    }
+    setDateData(temp)
+  }, [showCase])
+
   return (
     <div className="timeline-wrapper">
       {/* TimelinePage */}
@@ -27,7 +44,9 @@ const TimelinePage = () => {
         </div>
 
         {dates.map((item) => (
-          <DateRangeColumn date={item} />
+          <div onClick={() => setShowCase(item)}>
+            <DateRangeColumn date={item} />
+          </div>
         ))}
       </div>
       <div className="context-rows-wrapper">
@@ -41,6 +60,7 @@ const TimelinePage = () => {
           </div>
         ))}
       </div>
+      <DataShowCase showCase={showCase} dateData={dateData}/>
     </div>
   );
 };
