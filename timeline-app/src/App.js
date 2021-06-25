@@ -4,7 +4,6 @@ import { TimelinePage } from "./pages/index";
 const App = () => {
   return (
     <div>
-      App
       <TimelinePage />
     </div>
   );

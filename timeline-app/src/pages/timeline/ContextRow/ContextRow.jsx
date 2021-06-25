@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "./ContextRow.scss";
 
 const ContextRow = ({ contextData, contextName, dates }) => {
-  console.log(contextData);
   const [dataRows, setDataRows] = useState([]);
   useEffect(() => {
     const temp = [];
@@ -18,14 +17,14 @@ const ContextRow = ({ contextData, contextName, dates }) => {
             <div className="item-name" key={contextData[dataCounter].name}>
               {contextData[dataCounter].name}
             </div>
-            <div>{contextData[dataCounter].date}</div>
+            <div key={dataCounter}>{contextData[dataCounter].date}</div>
           </div>
         );
         dataCounter++;
       } else {
         temp.push(
-            <div>
-<hr />
+            <div key={i}>
+                <hr />
             </div>
         );
       }
