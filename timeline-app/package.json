@@ -20,9 +20,11 @@
     "prettier": "^2.3.1"
   },
   "dependencies": {
+    "@wojtekmaj/react-daterange-picker": "^3.2.0",
     "dayjs": "^1.10.5",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-modal": "^3.14.3",
     "sass": "^1.35.1"
   }
 }

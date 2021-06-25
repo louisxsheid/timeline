@@ -17,7 +17,7 @@ const ContextRow = ({ contextData, contextName, dates }) => {
             <div className="item-name" key={contextData[dataCounter].name}>
               {contextData[dataCounter].name}
             </div>
-            <div key={dataCounter}>{contextData[dataCounter].date}</div>
+            {/* <div key={dataCounter}>{contextData[dataCounter].date}</div> */}
           </div>
         );
         dataCounter++;

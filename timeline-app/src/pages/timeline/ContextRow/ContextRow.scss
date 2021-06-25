@@ -7,8 +7,8 @@
 }
 
 .context-name {
-    width: 15vw;
-    height: 10vh;
+    min-width: 15vw;
+    height: 8vh;
     background-color: darkslategray;
     font-size: 1.5rem;
     border: 1px solid white;
@@ -28,5 +28,5 @@
 hr {
     border-bottom: 4px solid black;
     width: 10vw;
-    margin-top: 4.5vh;
+    margin-top: 4vh;
 }

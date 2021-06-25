@@ -6,20 +6,39 @@ import DateRangeColumn from "../DateRange/DateRangeColumn";
 // eslint-disable-next-line no-unused-vars
 import DataShowCase from "../DataShowCase/DataShowCase";
 import { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+// eslint-disable-next-line no-unused-vars
+import Modal from 'react-modal';
+import dayjs from "dayjs";
 
 const TimelinePage = ({ allData }) => {
   const [showCase, setShowCase ] = useState("temp");
   const [dateData, setDateData ] = useState("");
-  const dates = [
-    "6/22/2021",
-    "6/23/2021",
-    "6/24/2021",
-    "6/25/2021",
-    "6/26/2021",
-    "6/27/2021",
-    "6/28/2021",
-    "6/29/2021"
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const preDates = [
+    "06/22/2021",
+    "06/23/2021",
+    "06/24/2021",
+    "06/25/2021",
+    "06/26/2021",
+    "06/27/2021",
+    "06/28/2021",
+    "06/29/2021"
   ];
+  const [dateRange, setDateRange] = useState({start: dayjs().subtract(1, "week").format(), end: dayjs().format()})
+
+  const [value, onChange] = useState([dateRange.start, dateRange.end]);
+  const [dates, setDates] = useState(preDates);
+
+  useEffect(() => {
+    let tempDates = [];
+    const daysBetweenDates = dayjs(dateRange.end).diff(dayjs(dateRange.start), "day");
+    for(let i = 0; i < daysBetweenDates + 1; i++) {
+      tempDates.push(dayjs(dateRange.start).add(i, "day").format("MM/DD/YYYY"));
+    }
+    setDates(tempDates);
+  }, [dateRange])
 
   useEffect(() => {
     let temp = [];
@@ -33,16 +52,36 @@ const TimelinePage = ({ allData }) => {
     setDateData(temp)
   }, [showCase])
 
+  useEffect(() => {
+    setDateRange({
+      start: dayjs(value[0]).format("MM/DD/YYYY"),
+      end: dayjs(value[1]).format("MM/DD/YYYY")
+    })
+
+  }, [value]);
+
   return (
     <div className="timeline-wrapper">
       {/* TimelinePage */}
       <div style={{ display: "flex" }}>
         <div
-          style={{ width: "15vw", border: "2px solid black", height: "5vh", backgroundColor: "yellow" }}
+          style={{ minWidth: "15vw", border: "2px solid black", height: "5vh", backgroundColor: "yellow" }}
+          onClick={() => setIsOpen(true)}
         >
-          {dates[0]} - {dates[dates.length - 1]}
+          {dateRange.start} - {dateRange.end}
         </div>
-
+          <Modal
+          isOpen={modalIsOpen}
+          // onAfterOpen={afterOpenModal}
+          // onRequestClose={closeModal}
+          // className="dateModal"
+          contentLabel="Example Modal"
+          >
+            <DateRangePicker onChange={onChange} value={value}/> 
+            <button
+              onClick={() => setIsOpen(false)}
+            >exit</button>
+          </Modal>
         {dates.map((item) => (
           <div onClick={() => setShowCase(item)}>
             <DateRangeColumn date={item} />
