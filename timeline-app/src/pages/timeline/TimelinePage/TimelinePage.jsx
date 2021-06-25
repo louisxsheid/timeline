@@ -13,6 +13,8 @@ const TimelinePage = () => {
     "6/25/2021",
     "6/26/2021",
     "6/27/2021",
+    "6/28/2021",
+    "6/29/2021"
   ];
   return (
     <div className="timeline-wrapper">
