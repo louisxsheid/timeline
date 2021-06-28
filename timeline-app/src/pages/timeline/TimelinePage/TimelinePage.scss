@@ -1,11 +1,23 @@
 .timeline-wrapper {
     background-color: #FFFBEB;
+    width: min-content;
 }
 
-.dateModal {
+.date-modal {
     background-color: whitesmoke;
-    height: 25vh;
-    width: 25vw;
-    justify-content: center;
-    align-items: center;
+    height: 20rem;
+    width: 24rem;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.date-range {
+    min-width: 15rem;
+    border: 1px solid black;
+    min-height: 4rem;
+    background-color: yellow;
+}
+
+.context-rows-wrapper {
+    width:min-content;
 }

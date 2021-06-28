@@ -18,20 +18,10 @@ const TimelinePage = ({ allData }) => {
   const [showCase, setShowCase ] = useState("temp");
   const [dateData, setDateData ] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
-  const preDates = [
-    "06/22/2021",
-    "06/23/2021",
-    "06/24/2021",
-    "06/25/2021",
-    "06/26/2021",
-    "06/27/2021",
-    "06/28/2021",
-    "06/29/2021"
-  ];
   const [dateRange, setDateRange] = useState({start: dayjs().weekday(0).format(), end: dayjs().weekday(6).format()})
 
   const [value, onChange] = useState([dateRange.start, dateRange.end]);
-  const [dates, setDates] = useState(preDates);
+  const [dates, setDates] = useState([]);
 
   useEffect(() => {
     let tempDates = [];
@@ -60,7 +50,6 @@ const TimelinePage = ({ allData }) => {
       start: dayjs(value[0]).format("MM/DD/YYYY"),
       end: dayjs(value[1]).format("MM/DD/YYYY")
     })
-
   }, [value]);
 
   return (
@@ -68,7 +57,7 @@ const TimelinePage = ({ allData }) => {
       {/* TimelinePage */}
       <div style={{ display: "flex" }}>
         <div
-          style={{ minWidth: "15vw", border: "2px solid black", height: "5vh", backgroundColor: "yellow" }}
+          className="date-range"
           onClick={() => setIsOpen(true)}
         >
           {dateRange.start} - {dateRange.end}
@@ -77,7 +66,7 @@ const TimelinePage = ({ allData }) => {
           isOpen={modalIsOpen}
           // onAfterOpen={afterOpenModal}
           // onRequestClose={closeModal}
-          // className="dateModal"
+          className="date-modal"
           contentLabel="Example Modal"
           >
             <DateRangePicker onChange={onChange} value={value}/> 
@@ -102,7 +91,7 @@ const TimelinePage = ({ allData }) => {
           </div>
         ))}
       </div>
-      <DataShowCase showCase={showCase} dateData={dateData}/>
+      {/* <DataShowCase showCase={showCase} dateData={dateData}/> */}
     </div>
   );
 };

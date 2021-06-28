@@ -1,14 +1,13 @@
 .context-bar-wrapper {
     display: flex;
-    flex-direction: flex;
     color: white;
     border: 1px solid black;
     text-align: center;
 }
 
 .context-name {
-    min-width: 15vw;
-    height: 8vh;
+    min-width: 15rem;
+    height: 5rem;
     background-color: darkslategray;
     font-size: 1.5rem;
     border: 1px solid white;
@@ -17,7 +16,7 @@
 .item-context-wrapper {
     display: flex;
     flex-direction: column;
-    width: 10vw;
+    width: 10rem;
     border: 1px solid black;
     background-color: darkred;
     .item-name {
@@ -27,6 +26,12 @@
 
 hr {
     border-bottom: 4px solid black;
-    width: 10vw;
-    margin-top: 4vh;
+    width: 10rem;
+    margin-top: 2.5rem;
+}
+
+.nodata {
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    width: 10rem;
 }

@@ -23,7 +23,7 @@ const ContextRow = ({ contextData, contextName, dates }) => {
         dataCounter++;
       } else {
         temp.push(
-            <div key={i}>
+            <div className="nodata" key={i}>
                 <hr />
             </div>
         );
