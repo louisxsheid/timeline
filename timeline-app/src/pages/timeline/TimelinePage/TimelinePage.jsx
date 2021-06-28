@@ -15,7 +15,7 @@ const weekday = require("dayjs/plugin/weekday");
 dayjs.extend(weekday);
 
 const TimelinePage = ({ allData }) => {
-  const [showCase, setShowCase] = useState("temp");
+  const [showCase, setShowCase] = useState({ type: null, data: "" });
   const [dateData, setDateData] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [dateRange, setDateRange] = useState({
@@ -40,12 +40,23 @@ const TimelinePage = ({ allData }) => {
 
   useEffect(() => {
     let temp = [];
-    for (let context of allData) {
-      for (let data of context.data) {
-        if (data.date == showCase) {
-          temp.push(data);
+    switch (showCase.type) {
+      case 0:
+        for (let context of allData) {
+          for (let data of context.data) {
+            if (data.date == showCase.data) {
+              temp.push(data);
+            }
+          }
         }
-      }
+        break;
+      case 1:
+        for (let context of allData) {
+          if (context.context == showCase.data) {
+            temp.push(context);
+          }
+        }
+        break;
     }
     setDateData(temp);
   }, [showCase]);
@@ -108,14 +119,16 @@ const TimelinePage = ({ allData }) => {
           <button onClick={() => setIsOpen(false)}>exit</button>
         </Modal>
         {dates.map((item) => (
-          <div onClick={() => setShowCase(item)}>
+          <div onClick={() => setShowCase({ type: 0, data: item})}>
             <DateRangeColumn date={item} />
           </div>
         ))}
       </div>
       <div className="context-rows-wrapper">
         {allData.map((item) => (
-          <div key={item.context}>
+          <div 
+            onClick={() => setShowCase({type: 1, data: item.context})}
+          key={item.context}>
             <ContextRow
               dates={dates}
               contextData={item.data}

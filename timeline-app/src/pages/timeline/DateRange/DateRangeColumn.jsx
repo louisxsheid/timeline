@@ -2,18 +2,29 @@ import "./DateRangeColumn.scss";
 import dayjs from "dayjs";
 
 const DateRangeColumn = ({ date }) => {
-  const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
   const today = {
-    backgroundColor: "red"
-  }
+    backgroundColor: "red",
+  };
   const notToday = {
-    color: "white"
-  }
+    color: "white",
+  };
   return (
-  <div className="date-range-wrapper" style={dayjs().format("MM/DD/YYYY") == date ? today : notToday}>
-    <div style={{color: "white"}}>{weekdays[dayjs(date).day()]}</div>
-    <div>{date}</div>
-  </div>
+    <div
+      className="date-range-wrapper"
+      style={dayjs().format("MM/DD/YYYY") == date ? today : notToday}
+    >
+      <div style={{ color: "white" }}>{weekdays[dayjs(date).day()]}</div>
+      <div>{date}</div>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 const DataShowCase = ({ showCase, dateData }) => {
   return (
     <div>
-      {showCase}
+      {showCase.data}
       <pre>{JSON.stringify(dateData, null, 2)}</pre>
     </div>
   );
