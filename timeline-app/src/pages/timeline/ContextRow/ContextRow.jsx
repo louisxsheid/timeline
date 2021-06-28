@@ -9,7 +9,6 @@ const ContextRow = ({ contextData, contextName, dates }) => {
     for (let i in dates) {
       dateFound = false;
       for (let j in contextData) {
-        console.log(dates[i], contextData[j].date);
         if (dates[i] == contextData[j].date) {
           temp.push(
             <div className="item-context-wrapper" key={contextData[j].name}>
@@ -31,9 +30,6 @@ const ContextRow = ({ contextData, contextName, dates }) => {
       }
     }
     setDataRows(temp);
-    // return () => {
-    //     cleanup
-    // }
   }, [dates]);
   return (
     <div className="context-bar-wrapper">
