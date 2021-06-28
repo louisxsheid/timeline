@@ -11,6 +11,8 @@ import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 // eslint-disable-next-line no-unused-vars
 import Modal from 'react-modal';
 import dayjs from "dayjs";
+const weekday = require('dayjs/plugin/weekday');
+dayjs.extend(weekday);
 
 const TimelinePage = ({ allData }) => {
   const [showCase, setShowCase ] = useState("temp");
@@ -26,7 +28,7 @@ const TimelinePage = ({ allData }) => {
     "06/28/2021",
     "06/29/2021"
   ];
-  const [dateRange, setDateRange] = useState({start: dayjs().subtract(1, "week").format(), end: dayjs().format()})
+  const [dateRange, setDateRange] = useState({start: dayjs().weekday(0).format(), end: dayjs().weekday(6).format()})
 
   const [value, onChange] = useState([dateRange.start, dateRange.end]);
   const [dates, setDates] = useState(preDates);
@@ -53,6 +55,7 @@ const TimelinePage = ({ allData }) => {
   }, [showCase])
 
   useEffect(() => {
+    console.log(dayjs(value[0]).day(), dayjs(value[1]).day());
     setDateRange({
       start: dayjs(value[0]).format("MM/DD/YYYY"),
       end: dayjs(value[1]).format("MM/DD/YYYY")
