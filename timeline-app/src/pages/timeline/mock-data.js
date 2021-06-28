@@ -77,7 +77,7 @@ const allData = [
         name: "Name4C4",
         context: "context3",
         date: "06/27/2021",
-      }
+      },
     ],
   },
   {
@@ -157,7 +157,7 @@ const allData = [
         name: "Name4C4",
         context: "context3",
         date: "06/27/2021",
-      }
+      },
     ],
   },
 ];

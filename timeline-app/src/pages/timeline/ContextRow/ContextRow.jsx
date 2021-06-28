@@ -5,27 +5,28 @@ const ContextRow = ({ contextData, contextName, dates }) => {
   const [dataRows, setDataRows] = useState([]);
   useEffect(() => {
     const temp = [];
-    let dataCounter = 0;
+    let dateFound;
     for (let i in dates) {
-      if (dataCounter >= contextData.length) break;
-      if (dates[i] == contextData[dataCounter].date) {
-        temp.push(
-          <div
-            className="item-context-wrapper"
-            key={contextData[dataCounter].name}
-          >
-            <div className="item-name" key={contextData[dataCounter].name}>
-              {contextData[dataCounter].name}
+      dateFound = false;
+      for (let j in contextData) {
+        console.log(dates[i], contextData[j].date);
+        if (dates[i] == contextData[j].date) {
+          temp.push(
+            <div className="item-context-wrapper" key={contextData[j].name}>
+              <div className="item-name" key={contextData[j].name}>
+                {contextData[j].name}
+              </div>
+              <div key={j}>{contextData[j].date}</div>
             </div>
-            {/* <div key={dataCounter}>{contextData[dataCounter].date}</div> */}
+          );
+          dateFound = true;
+        }
+      }
+      if (!dateFound) {
+        temp.push(
+          <div className="nodata" key={i}>
+            <hr />
           </div>
-        );
-        dataCounter++;
-      } else {
-        temp.push(
-            <div className="nodata" key={i}>
-                <hr />
-            </div>
         );
       }
     }
