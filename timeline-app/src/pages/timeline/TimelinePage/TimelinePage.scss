@@ -21,3 +21,14 @@
 .context-rows-wrapper {
     width:min-content;
 }
+
+.arrows {
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    color: gray;
+}

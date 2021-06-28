@@ -62,8 +62,40 @@ const TimelinePage = ({ allData }) => {
     <div className="timeline-wrapper">
       {/* TimelinePage */}
       <div style={{ display: "flex" }}>
-        <div className="date-range" onClick={() => setIsOpen(true)}>
-          {dateRange.start} - {dateRange.end}
+        <div className="date-range">
+          <div onClick={() => setIsOpen(true)} style={{ textAlign: "center" }}>
+            {dateRange.start} - {dateRange.end}
+          </div>
+          <div className="arrows">
+            <div
+              className="arrow"
+              onClick={() => {
+                setDateRange({
+                  start: dayjs(dateRange.start)
+                    .subtract(1, "week")
+                    .format("MM/DD/YYYY"),
+                  end: dayjs(dateRange.end)
+                    .subtract(1, "week")
+                    .format("MM/DD/YYYY"),
+                });
+              }}
+            >
+              ←
+            </div>
+            <div
+              className="arrow"
+              onClick={() => {
+                setDateRange({
+                  start: dayjs(dateRange.start)
+                    .add(1, "week")
+                    .format("MM/DD/YYYY"),
+                  end: dayjs(dateRange.end).add(1, "week").format("MM/DD/YYYY"),
+                });
+              }}
+            >
+              →
+            </div>
+          </div>
         </div>
         <Modal
           isOpen={modalIsOpen}
