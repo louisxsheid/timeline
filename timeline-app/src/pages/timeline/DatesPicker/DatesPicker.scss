@@ -1,0 +1,25 @@
+.date-modal {
+    background-color: whitesmoke;
+    height: 20rem;
+    width: 24rem;
+    margin: 0 auto;
+    border: 1px solid black;
+}
+
+.date-range {
+    min-width: 15rem;
+    border: 1px solid black;
+    min-height: 4rem;
+    background-color: yellow;
+}
+
+.arrows {
+    display: flex;
+    font-size: 2rem;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.arrow:hover {
+    color: gray;
+}

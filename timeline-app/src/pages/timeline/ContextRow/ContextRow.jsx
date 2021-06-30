@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ContextRow.scss";
 
-const ContextRow = ({ contextData, contextName, dates }) => {
+const ContextRow = ({ contextData, contextName, dates, showCase }) => {
   const [dataRows, setDataRows] = useState([]);
+
   useEffect(() => {
     const temp = [];
     let dateFound;
@@ -11,7 +12,9 @@ const ContextRow = ({ contextData, contextName, dates }) => {
       for (let j in contextData) {
         if (dates[i] == contextData[j].date) {
           temp.push(
-            <div className="item-context-wrapper" key={contextData[j].name}>
+            <div 
+              onClick={() => console.log(contextData[j].name)}
+            className="item-context-wrapper" key={contextData[j].name}>
               <div className="item-name" key={contextData[j].name}>
                 {contextData[j].name}
               </div>
@@ -33,8 +36,12 @@ const ContextRow = ({ contextData, contextName, dates }) => {
   }, [dates]);
   return (
     <div className="context-bar-wrapper">
-      <div className="context-name">{contextName}</div>
-      {dataRows}
+      <div
+        className="context-name"
+      >
+        {contextName}
+      </div>
+      <div style={{ display: "flex" }}>{dataRows}</div>
     </div>
   );
 };

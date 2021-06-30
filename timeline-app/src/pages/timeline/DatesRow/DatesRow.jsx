@@ -1,7 +1,7 @@
-import "./DateRangeColumn.scss";
+import "./DatesRow.scss";
 import dayjs from "dayjs";
 
-const DateRangeColumn = ({ date }) => {
+const DatesRow = ({ date }) => {
   const weekdays = [
     "Sunday",
     "Monday",
@@ -28,4 +28,4 @@ const DateRangeColumn = ({ date }) => {
   );
 };
 
-export default DateRangeColumn;
+export default DatesRow;
