@@ -57,10 +57,10 @@ const TimelinePage = ({ allData }) => {
   return (
     <div className="timeline-wrapper">
       <div style={{ display: "flex" }}>
-        <DatesPicker 
+        <DatesPicker
           dateRange={dateRange}
-          setDateRange={setDateRange} 
-          setShowCase={setShowCase} 
+          setDateRange={setDateRange}
+          setShowCase={setShowCase}
           dates={dates}
         />
         {dates.map((item) => (
