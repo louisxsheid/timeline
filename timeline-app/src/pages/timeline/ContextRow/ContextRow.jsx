@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./ContextRow.scss";
 import dayjs from "dayjs";
 
-const ContextRow = ({ contextData, contextName, dates }) => {
+const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
   const [dataRows, setDataRows] = useState([]);
 
   useEffect(() => {
@@ -16,7 +16,13 @@ const ContextRow = ({ contextData, contextName, dates }) => {
         if (dates[i] == contextData[j].date) {
           dataIsFilled = true;
           temp.push(
-            <div className="item-context-wrapper" key={contextData[j].name}>
+            <div
+              onClick={() =>
+                setShowCase({ type: 2, data: contextData[j].name })
+              }
+              className="item-context-wrapper"
+              key={contextData[j].name}
+            >
               <div className="item-name" key={contextData[j].name}>
                 {contextData[j].name}
               </div>
@@ -43,10 +49,17 @@ const ContextRow = ({ contextData, contextName, dates }) => {
     }
     setDataRows(temp);
   }, [dates]);
-
   return (
     <div className="context-bar-wrapper">
-      <div className="context-name">{contextName}</div>
+      <div
+        className="context-name"
+        onClick={() => setShowCase({ type: 1, data: contextName })}
+      >
+        <div>{contextName}</div>
+        <div style={{ fontSize: "1rem" }}>
+          first entry: {contextData[0].date}
+        </div>
+      </div>
       <div style={{ display: "flex" }}>{dataRows}</div>
     </div>
   );

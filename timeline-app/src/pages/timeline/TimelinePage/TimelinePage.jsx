@@ -50,8 +50,16 @@ const TimelinePage = ({ allData }) => {
           }
         }
         break;
+      case 2:
+        for (let context of allData) {
+          for (let data of context.data) {
+            if (data.name == showCase.data) {
+              temp.push(data);
+            }
+          }
+        }
     }
-    setDateData(temp);
+    temp.length ? setDateData(temp) : setDateData("no data");
   }, [showCase]);
 
   return (
@@ -64,7 +72,7 @@ const TimelinePage = ({ allData }) => {
           dates={dates}
         />
         {dates.map((item) => (
-          <div onClick={() => setShowCase({ type: 0, data: item })}>
+          <div onClick={() => setShowCase({ type: 0, data: item })} key={item}>
             <DatesRow date={item} />
           </div>
         ))}
@@ -72,13 +80,14 @@ const TimelinePage = ({ allData }) => {
       <div className="context-rows-wrapper">
         {allData.map((item) => (
           <div
-            onClick={() => setShowCase({ type: 1, data: item.context })}
+            // onClick={() => setShowCase({ type: 1, data: item.context })}
             key={item.context}
           >
             <ContextRow
               dates={dates}
               contextData={item.data}
               contextName={item.context}
+              setShowCase={setShowCase}
             />
           </div>
         ))}
