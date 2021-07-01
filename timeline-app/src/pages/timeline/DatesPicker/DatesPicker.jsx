@@ -1,10 +1,10 @@
 import "./DatesPicker.scss";
 import dayjs from "dayjs";
 import Modal from "react-modal";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker/dist/DateRangePicker";
 import { useEffect, useState } from "react";
+import InputStartingDate from "../InputStartingDate/InputStartingDate";
 
-const DatesPicker = ({ dateRange, setDateRange, setShowCase, dates }) => {
+const DatesPicker = ({ dateRange, setDateRange }) => {
   const [value, onChange] = useState([dateRange.start, dateRange.end]);
   const [modalIsOpen, setIsOpen] = useState(false);
 
@@ -59,9 +59,12 @@ const DatesPicker = ({ dateRange, setDateRange, setShowCase, dates }) => {
         // onRequestClose={closeModal}
         className="date-modal"
         contentLabel="Example Modal"
+        ariaHideApp={false}
       >
-        <DateRangePicker onChange={onChange} value={value} />
-        <button onClick={() => setIsOpen(false)}>exit</button>
+        <>
+          {/* <InputStartingDate value={value} onChange={onChange} /> */}
+          <button onClick={() => setIsOpen(false)}>exit</button>
+        </>
       </Modal>
     </div>
   );

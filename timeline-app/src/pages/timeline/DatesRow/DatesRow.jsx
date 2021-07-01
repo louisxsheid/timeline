@@ -14,13 +14,22 @@ const DatesRow = ({ date }) => {
   const today = {
     backgroundColor: "red",
   };
-  const notToday = {
-    color: "white",
+
+  const future = {};
+
+  const past = {
+    backgroundColor: "black",
   };
   return (
     <div
       className="date-range-wrapper"
-      style={dayjs().format("MM/DD/YYYY") == date ? today : notToday}
+      style={
+        dayjs().format("MM/DD/YYYY") == date
+          ? today
+          : dayjs(date).isBefore(dayjs())
+          ? past
+          : future
+      }
     >
       <div style={{ color: "white" }}>{weekdays[dayjs(date).day()]}</div>
       <div>{date}</div>
