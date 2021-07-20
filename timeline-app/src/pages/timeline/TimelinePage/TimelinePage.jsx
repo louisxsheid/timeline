@@ -92,7 +92,7 @@ const TimelinePage = ({ allData }) => {
           </div>
         ))}
       </div>
-      <DataShowCase showCase={showCase} dateData={dateData} />
+      {/* <DataShowCase showCase={showCase} dateData={dateData} /> */}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 .timeline-wrapper {
     background-color: #FFFBEB;
     width: min-content;
+    margin-left: 15rem;
+
 }
 
 .date-modal {
@@ -15,11 +17,16 @@
     min-width: 15rem;
     border: 1px solid black;
     min-height: 4rem;
-    background-color: yellow;
+    // background-color: yellow;
 }
 
 .context-rows-wrapper {
     width:min-content;
+    height: 36rem;
+    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: none;
+    background-color: lightgrey;
 }
 
 .arrows {
