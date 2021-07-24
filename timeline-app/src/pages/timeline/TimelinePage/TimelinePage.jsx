@@ -63,36 +63,41 @@ const TimelinePage = ({ allData }) => {
   }, [showCase]);
 
   return (
-    <div className="timeline-wrapper">
-      <div style={{ display: "flex" }}>
-        <DatesPicker
-          dateRange={dateRange}
-          setDateRange={setDateRange}
-          setShowCase={setShowCase}
-          dates={dates}
-        />
-        {dates.map((item) => (
-          <div onClick={() => setShowCase({ type: 0, data: item })} key={item}>
-            <DatesRow date={item} />
-          </div>
-        ))}
+    <div style={{ display: "flex" }}>
+      <DataShowCase showCase={showCase} dateData={dateData} />
+      <div className="timeline-wrapper">
+        <div style={{ display: "flex" }}>
+          <DatesPicker
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            setShowCase={setShowCase}
+            dates={dates}
+          />
+          {dates.map((item) => (
+            <div
+              onClick={() => setShowCase({ type: 0, data: item })}
+              key={item}
+            >
+              <DatesRow date={item} />
+            </div>
+          ))}
+        </div>
+        <div className="context-rows-wrapper">
+          {allData.map((item) => (
+            <div
+              // onClick={() => setShowCase({ type: 1, data: item.context })}
+              key={item.context}
+            >
+              <ContextRow
+                dates={dates}
+                contextData={item.data}
+                contextName={item.context}
+                setShowCase={setShowCase}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="context-rows-wrapper">
-        {allData.map((item) => (
-          <div
-            // onClick={() => setShowCase({ type: 1, data: item.context })}
-            key={item.context}
-          >
-            <ContextRow
-              dates={dates}
-              contextData={item.data}
-              contextName={item.context}
-              setShowCase={setShowCase}
-            />
-          </div>
-        ))}
-      </div>
-      {/* <DataShowCase showCase={showCase} dateData={dateData} /> */}
     </div>
   );
 };

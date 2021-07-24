@@ -1,0 +1,43 @@
+.homepage-wrapper {
+    background-color: #FFFBEB;
+    // padding-top: 2rem;
+    padding-left: 2rem;
+    // margin-top: 2rem;
+    // height: 40rem;
+    // width: 86rem;
+    // height: 100%;
+    height: 100vh;
+    margin-left: 15rem;
+    overflow: auto;
+    overflow-x: none;
+}
+
+.all-data {
+    padding-top: 1rem;
+    border: 1px solid black;
+    overflow: auto;
+    height: 50rem;
+    width: 25rem;
+}
+
+// .collapsible-close {
+//     padding-top: 2rem;
+//     padding-bottom: 2rem;
+// }
+
+.collapsible-close, .collapsible-open {
+    // padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: #CCC;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+    width: 20rem;
+}
+
+.collapsible-close:hover {
+}
+
+.collapsible-open {
+    height: 20rem;
+    overflow: auto;
+}

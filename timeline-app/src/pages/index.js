@@ -1,5 +1,5 @@
 import TimelinePage from "./timeline/TimelinePage/TimelinePage";
 import DataShowCase from "./timeline/DataShowCase/DataShowCase";
-import SideBar from "./sidebar/SideBar/SideBar";
+import HomePage from "./home/HomePage/HomePage";
 
-export { TimelinePage, DataShowCase, SideBar };
+export { TimelinePage, DataShowCase, HomePage };
