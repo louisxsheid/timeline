@@ -58,6 +58,10 @@ const TimelinePage = ({ allData }) => {
             }
           }
         }
+        break;
+      case 3:
+        setDateData("no data");
+        break;
     }
     temp.length ? setDateData(temp) : setDateData("no data");
   }, [showCase]);

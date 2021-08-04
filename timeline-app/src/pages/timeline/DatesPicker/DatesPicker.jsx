@@ -3,13 +3,15 @@ import dayjs from "dayjs";
 import Modal from "react-modal";
 import { useEffect, useState } from "react";
 import InputStartingDate from "../InputStartingDate/InputStartingDate";
+import DropDown from "../../../components/Dropdown/DropDown";
 
 const DatesPicker = ({ dateRange, setDateRange }) => {
   const [value, onChange] = useState([dateRange.start, dateRange.end]);
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [selectedInterval, setSelectedInterval] = useState("weekly");
 
   useEffect(() => {
-    console.log(dayjs(value[0]).day(), dayjs(value[1]).day());
     setDateRange({
       start: dayjs(value[0]).format("MM/DD/YYYY"),
       end: dayjs(value[1]).format("MM/DD/YYYY"),
@@ -38,6 +40,17 @@ const DatesPicker = ({ dateRange, setDateRange }) => {
           >
             ←
           </div>
+          <div onClick={() => setOpen(!open)} style={{ fontSize: "2rem" }}>
+            {selectedInterval}
+          </div>
+          {open && (
+            <DropDown
+              state={selectedInterval}
+              setState={setSelectedInterval}
+              options={["weekly", "monthly", "yearly"]}
+              setOpen={setOpen}
+            />
+          )}
           <div
             className="arrow"
             onClick={() => {

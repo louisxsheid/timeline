@@ -5,7 +5,6 @@ const DataShowCase = ({ showCase, dateData }) => {
   return (
     <div className="datashowcase-wrapper">
       <div className="title">SPOTLIGHT</div>
-      <div>-----------------------------------</div>
       {showCase.data}
       <pre>{JSON.stringify(dateData, null, 2)}</pre>
     </div>

@@ -1,10 +1,5 @@
 .timeline-wrapper {
     background-color: #FFFBEB;
-    width: min-content;
-    // margin-left: 30rem;
-    // position: relative;
-    // -webkit-box-shadow: -4px 0px 6px -1px rgba(0,0,0,0.39); 
-    // box-shadow: -4px 0px 6px -1px rgba(0,0,0,0.39);
 }
 
 .date-modal {
@@ -24,10 +19,9 @@
 
 .context-rows-wrapper {
     width:min-content;
-    height: 36rem;
-    overflow: auto;
-    overflow-x: hidden;
     background-color: lightgrey;
+    height: 90vh;
+    overflow: auto;
 }
 
 .arrows {

@@ -12,11 +12,12 @@
     overflow-x: none;
 }
 
+
 .all-data {
     padding-top: 1rem;
     border: 1px solid black;
     overflow: auto;
-    height: 50rem;
+    height: 25rem;
     width: 25rem;
 }
 
@@ -40,4 +41,8 @@
 .collapsible-open {
     height: 20rem;
     overflow: auto;
+}
+
+.progress {
+    padding-top: 1rem;
 }

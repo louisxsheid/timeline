@@ -16,7 +16,7 @@ const App = () => {
               🏠 HOME
             </Link>
             <Link className="link-style" to="/calendar">
-              📅 CALENDAR
+              🌐 DATA
             </Link>
             {/* <li>
               <Link to="/users">Users</Link>

@@ -26,7 +26,7 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
               <div className="item-name" key={contextData[j].name}>
                 {contextData[j].name}
               </div>
-              <div key={j}>{contextData[j].date}</div>
+              {/* <div key={j}>{contextData[j].date}</div> */}
             </div>
           );
           dateFound = true;
@@ -38,12 +38,26 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
           dayjs(contextData[contextData.length - 1].date).isAfter(dates[i])
         ) {
           temp.push(
-            <div className="nodata" key={i}>
+            <div
+              className="nodata"
+              key={i}
+              onClick={() =>
+                setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
+              }
+            >
               <hr />
             </div>
           );
         } else if (!dateFound) {
-          temp.push(<div className="nodata" key={i}></div>);
+          temp.push(
+            <div
+              onClick={() =>
+                setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
+              }
+              className="nodata"
+              key={i}
+            ></div>
+          );
         }
       }
     }
@@ -55,10 +69,7 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
         className="context-name"
         onClick={() => setShowCase({ type: 1, data: contextName })}
       >
-        <div>{contextName}</div>
-        <div style={{ fontSize: "1rem" }}>
-          first entry: {contextData[0].date}
-        </div>
+        {contextName}
       </div>
       <div style={{ display: "flex" }}>{dataRows}</div>
     </div>
@@ -66,3 +77,8 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
 };
 
 export default ContextRow;
+{
+  /* <div style={{ fontSize: "1rem" }}>
+    first entry: {contextData[0].date}
+  </div> */
+}
