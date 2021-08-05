@@ -2,8 +2,26 @@ import { useEffect, useState } from "react";
 import "./ContextRow.scss";
 import dayjs from "dayjs";
 
-const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
+const ContextRow = ({
+  contextData,
+  contextName,
+  dates,
+  setShowCase,
+  selectedInterval,
+}) => {
   const [dataRows, setDataRows] = useState([]);
+  const [itemWidth, setItemWidth] = useState("");
+
+  useEffect(() => {
+    switch (selectedInterval) {
+      case "week":
+        setItemWidth("10.18rem");
+        break;
+      case "month":
+        setItemWidth("2.3rem");
+        break;
+    }
+  }, [selectedInterval]);
 
   useEffect(() => {
     const temp = [];
@@ -22,9 +40,10 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
               }
               className="item-context-wrapper"
               key={contextData[j].name}
+              style={{ width: itemWidth }}
             >
               <div className="item-name" key={contextData[j].name}>
-                {contextData[j].name}
+                {selectedInterval == "week" && contextData[j].name}
               </div>
               {/* <div key={j}>{contextData[j].date}</div> */}
             </div>
@@ -40,12 +59,13 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
           temp.push(
             <div
               className="nodata"
+              style={{ width: itemWidth }}
               key={i}
               onClick={() =>
                 setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
               }
             >
-              <hr />
+              <hr style={{ width: itemWidth }} />
             </div>
           );
         } else if (!dateFound) {
@@ -55,6 +75,7 @@ const ContextRow = ({ contextData, contextName, dates, setShowCase }) => {
                 setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
               }
               className="nodata"
+              style={{ width: itemWidth }}
               key={i}
             ></div>
           );

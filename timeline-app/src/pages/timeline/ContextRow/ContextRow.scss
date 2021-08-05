@@ -1,7 +1,13 @@
+:root {
+    --item-width: 2.3rem;
+}
+
 .context-bar-wrapper {
     display: flex;
     color: white;
     border: 1px solid gray;
+    width: 72vw;
+    overflow-x: hidden;
     .context-name {
         padding-top: 1rem;
         padding-left: 1rem;
@@ -18,7 +24,8 @@
 .item-context-wrapper {
     display: flex;
     flex-direction: column;
-    width: 10rem;
+    width: var(--item-width);
+    // width:fit-content;i
     border-right: 1px solid gray;
     background-color: darkred;
     cursor: pointer;
@@ -28,20 +35,22 @@
     }
 }
 
+
+
 .item-context-wrapper:hover {
     background-color: red;
 }
 
 hr {
     border-bottom: 4px solid black;
-    width: 10rem;
+    width: var(--item-width);
     margin-top: 2rem;
 }
 
 .nodata {
     border-right: 1px solid gray;
     border-left: 1px solid gray;
-    width: 10rem;
+    width: var(--item-width);
 }
 
 .nodata:hover {

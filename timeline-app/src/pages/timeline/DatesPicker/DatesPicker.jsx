@@ -5,24 +5,41 @@ import { useEffect, useState } from "react";
 import InputStartingDate from "../InputStartingDate/InputStartingDate";
 import DropDown from "../../../components/Dropdown/DropDown";
 
-const DatesPicker = ({ dateRange, setDateRange }) => {
+const DatesPicker = ({
+  setSelectedInterval,
+  selectedInterval,
+  dateRange,
+  setDateRange,
+}) => {
   const [value, onChange] = useState([dateRange.start, dateRange.end]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [selectedInterval, setSelectedInterval] = useState("weekly");
 
   useEffect(() => {
+    console.log("here");
     setDateRange({
       start: dayjs(value[0]).format("MM/DD/YYYY"),
       end: dayjs(value[1]).format("MM/DD/YYYY"),
     });
   }, [value]);
 
+  const handleDateRange = (direction) => {
+    switch (direction) {
+      case "add":
+        setDateRange((prev) => ({
+          start: dayjs(prev.start)
+            .add(1, selectedInterval)
+            .format("MM/DD/YYYY"),
+          end: dayjs(prev.end).add(1, selectedInterval).format("MM/DD/YYYY"),
+        }));
+    }
+  };
+
   return (
     <div>
       <div className="date-range">
         <div onClick={() => setIsOpen(true)} style={{ textAlign: "center" }}>
-          {dateRange.start} - {dateRange.end}
+          {/* {dateRange.start} - {dateRange.end} */}
         </div>
         <div className="arrows">
           <div
@@ -30,16 +47,24 @@ const DatesPicker = ({ dateRange, setDateRange }) => {
             onClick={() => {
               setDateRange({
                 start: dayjs(dateRange.start)
-                  .subtract(1, "week")
+                  .subtract(1, selectedInterval)
                   .format("MM/DD/YYYY"),
                 end: dayjs(dateRange.end)
-                  .subtract(1, "week")
+                  .subtract(1, selectedInterval)
                   .format("MM/DD/YYYY"),
               });
             }}
           >
             ←
           </div>
+          {/* {modalIsOpen && (
+            <DropDown
+              state={selectedInterval}
+              setState={setSelectedInterval}
+              options={["test"]}
+              setOpen={setIsOpen}
+            />
+         )} */}
           <div onClick={() => setOpen(!open)} style={{ fontSize: "2rem" }}>
             {selectedInterval}
           </div>
@@ -47,7 +72,7 @@ const DatesPicker = ({ dateRange, setDateRange }) => {
             <DropDown
               state={selectedInterval}
               setState={setSelectedInterval}
-              options={["weekly", "monthly", "yearly"]}
+              options={["week", "month"]}
               setOpen={setOpen}
             />
           )}
@@ -56,9 +81,11 @@ const DatesPicker = ({ dateRange, setDateRange }) => {
             onClick={() => {
               setDateRange({
                 start: dayjs(dateRange.start)
-                  .add(1, "week")
+                  .add(1, selectedInterval)
                   .format("MM/DD/YYYY"),
-                end: dayjs(dateRange.end).add(1, "week").format("MM/DD/YYYY"),
+                end: dayjs(dateRange.end)
+                  .add(1, selectedInterval)
+                  .format("MM/DD/YYYY"),
               });
             }}
           >
@@ -66,21 +93,22 @@ const DatesPicker = ({ dateRange, setDateRange }) => {
           </div>
         </div>
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        // onAfterOpen={afterOpenModal}
-        // onRequestClose={closeModal}
-        className="date-modal"
-        contentLabel="Example Modal"
-        ariaHideApp={false}
-      >
-        <>
-          {/* <InputStartingDate value={value} onChange={onChange} /> */}
-          <button onClick={() => setIsOpen(false)}>exit</button>
-        </>
-      </Modal>
     </div>
   );
 };
 
 export default DatesPicker;
+
+// <Modal
+//   isOpen={modalIsOpen}
+//   // onAfterOpen={afterOpenModal}
+//   // onRequestClose={closeModal}
+//   className="date-modal"
+//   contentLabel="Example Modal"
+//   ariaHideApp={false}
+// >
+//   <>
+//     {/* <InputStartingDate value={value} onChange={onChange} /> */}
+//     {/* <button onClick={() => setIsOpen(false)}>exit</button> */}
+//   </>
+// </Modal>
