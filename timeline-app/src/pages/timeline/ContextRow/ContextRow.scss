@@ -29,6 +29,7 @@
     border-right: 1px solid gray;
     background-color: darkred;
     cursor: pointer;
+    transition: background 250ms;
     .item-name {
         font-size: 1.5rem;
         margin: auto;
@@ -51,6 +52,7 @@ hr {
     border-right: 1px solid gray;
     border-left: 1px solid gray;
     width: var(--item-width);
+    transition: background 250ms;
 }
 
 .nodata:hover {

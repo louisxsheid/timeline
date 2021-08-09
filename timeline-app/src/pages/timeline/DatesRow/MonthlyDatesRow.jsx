@@ -2,15 +2,7 @@ import "./MonthlyDatesRow.scss";
 import dayjs from "dayjs";
 
 const MonthlyDatesRow = ({ date }) => {
-  const weekdays = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  const weekdays = ["Su", "M", "T", "W", "Th", "F", "S"];
   const today = {
     backgroundColor: "red",
   };
@@ -20,6 +12,7 @@ const MonthlyDatesRow = ({ date }) => {
   const past = {
     backgroundColor: "black",
   };
+
   return (
     <div
       className="date-range-wrapper-m"
@@ -31,7 +24,7 @@ const MonthlyDatesRow = ({ date }) => {
           : future
       }
     >
-      <div style={{ color: "white" }}>{weekdays[dayjs(date).day()][0]}</div>
+      <div style={{ color: "white" }}>{weekdays[dayjs(date).day()]}</div>
       <div>{dayjs(date).format("D")}</div>
     </div>
   );

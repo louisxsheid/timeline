@@ -16,17 +16,23 @@ const TimelinePage = ({ allData }) => {
   const [dateData, setDateData] = useState("");
   const [selectedInterval, setSelectedInterval] = useState("week");
   const [dateRange, setDateRange] = useState({
-    start: dayjs().weekday(0).format(),
-    end: dayjs().weekday(6).format(),
+    start: dayjs().weekday(0).format("MM/DD/YYYY"),
+    end: dayjs().weekday(6).format("MM/DD/YYYY"),
   });
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
-    const totalDays = selectedInterval == "week" ? 6 : 30;
-    setDateRange({
-      start: dayjs().weekday(0).format(),
-      end: dayjs().weekday(totalDays).format(),
-    });
+    if (selectedInterval == "week") {
+      setDateRange({
+        start: dayjs().weekday(0).format("MM/DD/YYYY"),
+        end: dayjs().weekday(6).format("MM/DD/YYYY"),
+      });
+    } else if (selectedInterval == "month") {
+      setDateRange({
+        start: dayjs().startOf("month").format("MM/DD/YYYY"),
+        end: dayjs().endOf("month").format("MM/DD/YYYY"),
+      });
+    }
   }, [selectedInterval]);
 
   useEffect(() => {

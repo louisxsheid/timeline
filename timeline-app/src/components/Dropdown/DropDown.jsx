@@ -1,12 +1,6 @@
-import { useState, useEffect } from "react";
-
 import "./DropDown.scss";
 
 const DropDown = ({ setOpen, state, setState, options }) => {
-  useEffect(() => {
-    console.log("here", state);
-  }, [state]);
-
   const DropdownItem = (props) => {
     return (
       <a
@@ -25,12 +19,7 @@ const DropDown = ({ setOpen, state, setState, options }) => {
   return (
     <div className="dropdown">
       {options.map((item) => (
-        <DropdownItem
-          key={item}
-          // onClick={() => setState(item)}
-        >
-          {item}
-        </DropdownItem>
+        <DropdownItem key={item}>{item}</DropdownItem>
       ))}
     </div>
   );

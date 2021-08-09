@@ -15,6 +15,21 @@ const DatesPicker = ({
   const [modalIsOpen, setIsOpen] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
   useEffect(() => {
     console.log("here");
     setDateRange({
@@ -23,23 +38,29 @@ const DatesPicker = ({
     });
   }, [value]);
 
-  const handleDateRange = (direction) => {
-    switch (direction) {
-      case "add":
-        setDateRange((prev) => ({
-          start: dayjs(prev.start)
-            .add(1, selectedInterval)
-            .format("MM/DD/YYYY"),
-          end: dayjs(prev.end).add(1, selectedInterval).format("MM/DD/YYYY"),
-        }));
-    }
-  };
+  // const handleDateRange = (direction) => {
+  //   switch (direction) {
+  //     case "add":
+  //       setDateRange((prev) => ({
+  //         start: dayjs(prev.start)
+  //           .add(1, selectedInterval)
+  //           .format("MM/DD/YYYY"),
+  //         end: dayjs(prev.end).add(1, selectedInterval).format("MM/DD/YYYY"),
+  //       }));
+  //   }
+  // };
 
   return (
     <div>
       <div className="date-range">
         <div onClick={() => setIsOpen(true)} style={{ textAlign: "center" }}>
-          {/* {dateRange.start} - {dateRange.end} */}
+          {selectedInterval == "week" ? (
+            `${dateRange.start} - ${dateRange.end}`
+          ) : (
+            <div>{`${monthNames[dayjs(dateRange.start).month()]} ${dayjs(
+              dateRange.start
+            ).year()}`}</div>
+          )}
         </div>
         <div className="arrows">
           <div
