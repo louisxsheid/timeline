@@ -5,8 +5,14 @@ const DataShowCase = ({ showCase }) => {
   return (
     <div className="datashowcase-wrapper">
       <div className="title">SPOTLIGHT</div>
+      {/* <pre>{JSON.stringify(showCase.data, null, 2)}</pre> */}
       {showCase.header}
-      <pre>{JSON.stringify(showCase.data, null, 2)}</pre>
+      {showCase.data.map((item) => (
+        <div className="showcase-item">
+          <div>{item.name}</div>
+          <div>{item.date}</div>
+        </div>
+      ))}
     </div>
   );
 };

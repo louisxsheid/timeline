@@ -23,14 +23,14 @@ const TimelinePage = ({ allData }) => {
             }
           }
         }
-        return { header: action.payload, data: temp };
+        return { header: action.payload, data: temp.length ? temp : [] };
       case "context":
         for (let context of allData) {
           if (context.context == action.payload) {
-            temp.push(context);
+            temp.push(...context.data);
           }
         }
-        return { header: action.payload, data: temp };
+        return { header: action.payload, data: temp.length ? temp : [] };
       case "with-data":
         for (let context of allData) {
           for (let data of context.data) {
@@ -39,9 +39,9 @@ const TimelinePage = ({ allData }) => {
             }
           }
         }
-        return { header: action.payload, data: temp };
+        return { header: action.payload, data: temp.length ? temp : [] };
       case "no-data":
-        return { header: action.payload, data: "no data" };
+        return { header: action.payload, data: [] };
       default:
         return state;
     }
@@ -49,7 +49,7 @@ const TimelinePage = ({ allData }) => {
 
   const [showCase, dispatch] = useReducer(showCaseReducer, {
     header: "no data",
-    data: "no data",
+    data: [],
   });
 
   const [selectedInterval, setSelectedInterval] = useState("week");
