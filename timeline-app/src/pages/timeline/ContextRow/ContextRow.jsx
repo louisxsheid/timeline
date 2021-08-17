@@ -6,7 +6,7 @@ const ContextRow = ({
   contextData,
   contextName,
   dates,
-  setShowCase,
+  showCaseDispatch,
   selectedInterval,
 }) => {
   const [dataRows, setDataRows] = useState([]);
@@ -36,7 +36,10 @@ const ContextRow = ({
           temp.push(
             <div
               onClick={() =>
-                setShowCase({ type: "with-data", data: contextData[j].name })
+                showCaseDispatch({
+                  type: "with-data",
+                  payload: contextData[j].name,
+                })
               }
               className="item-context-wrapper"
               key={contextData[j].name}
@@ -62,7 +65,10 @@ const ContextRow = ({
               style={{ width: itemWidth }}
               key={i}
               onClick={() =>
-                setShowCase({ type: "no-data", data: `${contextName} ${dates[i]}` })
+                showCaseDispatch({
+                  type: "no-data",
+                  payload: `${contextName} ${dates[i]}`,
+                })
               }
             >
               <hr style={{ width: itemWidth }} />
@@ -72,7 +78,10 @@ const ContextRow = ({
           temp.push(
             <div
               onClick={() =>
-                setShowCase({ type: "no-data", data: `${contextName} ${dates[i]}` })
+                showCaseDispatch({
+                  type: "no-data",
+                  payload: `${contextName} ${dates[i]}`,
+                })
               }
               className="nodata"
               style={{ width: itemWidth }}
@@ -88,7 +97,9 @@ const ContextRow = ({
     <div className="context-bar-wrapper">
       <div
         className="context-name"
-        onClick={() => setShowCase({ type: "context", data: contextName })}
+        onClick={() =>
+          showCaseDispatch({ type: "context", payload: contextName })
+        }
       >
         {contextName}
       </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import "./TimelinePage.scss";
 
 import ContextRow from "../ContextRow/ContextRow";
@@ -12,8 +12,46 @@ const weekday = require("dayjs/plugin/weekday");
 dayjs.extend(weekday);
 
 const TimelinePage = ({ allData }) => {
-  const [showCase, setShowCase] = useState({ type: null, data: "" });
-  const [dateData, setDateData] = useState("");
+  const showCaseReducer = (state, action) => {
+    let temp = [];
+    switch (action.type) {
+      case "date":
+        for (let context of allData) {
+          for (let data of context.data) {
+            if (data.date == action.payload) {
+              temp.push(data);
+            }
+          }
+        }
+        return { header: action.payload, data: temp };
+      case "context":
+        for (let context of allData) {
+          if (context.context == action.payload) {
+            temp.push(context);
+          }
+        }
+        return { header: action.payload, data: temp };
+      case "with-data":
+        for (let context of allData) {
+          for (let data of context.data) {
+            if (data.name == action.payload) {
+              temp.push(data);
+            }
+          }
+        }
+        return { header: action.payload, data: temp };
+      case "no-data":
+        return { header: action.payload, data: "no data" };
+      default:
+        return state;
+    }
+  };
+
+  const [showCase, dispatch] = useReducer(showCaseReducer, {
+    header: "no data",
+    data: "no data",
+  });
+
   const [selectedInterval, setSelectedInterval] = useState("week");
   const [dateRange, setDateRange] = useState({
     start: dayjs().weekday(0).format("MM/DD/YYYY"),
@@ -22,70 +60,34 @@ const TimelinePage = ({ allData }) => {
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
-    switch(selectedInterval) {
+    switch (selectedInterval) {
       case "week":
         setDateRange({
           start: dayjs().weekday(0).format("MM/DD/YYYY"),
           end: dayjs().weekday(6).format("MM/DD/YYYY"),
         });
         break;
-      case "month": 
+      case "month":
         setDateRange({
           start: dayjs().startOf("month").format("MM/DD/YYYY"),
           end: dayjs().endOf("month").format("MM/DD/YYYY"),
         });
         break;
-      }
+    }
   }, [selectedInterval]);
 
   useEffect(() => {
     let tempDates = [];
     const daysBetweenDates = selectedInterval == "week" ? 6 : 30;
-;
     for (let i = 0; i < daysBetweenDates + 1; i++) {
       tempDates.push(dayjs(dateRange.start).add(i, "day").format("MM/DD/YYYY"));
     }
     setDates(tempDates);
   }, [dateRange]);
 
-  useEffect(() => {
-    let temp = [];
-    switch (showCase.type) {
-      case "date":
-        for (let context of allData) {
-          for (let data of context.data) {
-            if (data.date == showCase.data) {
-              temp.push(data);
-            }
-          }
-        }
-        break;
-      case "context":
-        for (let context of allData) {
-          if (context.context == showCase.data) {
-            temp.push(context);
-          }
-        }
-        break;
-      case "with-data":
-        for (let context of allData) {
-          for (let data of context.data) {
-            if (data.name == showCase.data) {
-              temp.push(data);
-            }
-          }
-        }
-        break;
-      case "no-data":
-        setDateData("no data");
-        break;
-    }
-    temp.length ? setDateData(temp) : setDateData("no data");
-  }, [showCase]);
-
   return (
     <div style={{ display: "flex" }}>
-      <DataShowCase showCase={showCase} dateData={dateData} />
+      <DataShowCase showCase={showCase} />
       <div className="timeline-wrapper">
         <div style={{ display: "flex" }}>
           <DatesPicker
@@ -93,18 +95,18 @@ const TimelinePage = ({ allData }) => {
             setSelectedInterval={setSelectedInterval}
             dateRange={dateRange}
             setDateRange={setDateRange}
-            setShowCase={setShowCase}
+            setShowCase={dispatch}
             dates={dates}
           />
-          {dates.map((item) => (
+          {dates.map((date) => (
             <div
-              onClick={() => setShowCase({ type: "date", data: item })}
-              key={item}
+              onClick={() => dispatch({ type: "date", payload: date })}
+              key={date}
             >
               {dates.length < 28 ? (
-                <WeeklyDatesRow date={item} />
+                <WeeklyDatesRow date={date} />
               ) : (
-                <MonthlyDatesRow date={item} />
+                <MonthlyDatesRow date={date} />
               )}
             </div>
           ))}
@@ -117,7 +119,7 @@ const TimelinePage = ({ allData }) => {
                 dates={dates}
                 contextData={item.data}
                 contextName={item.context}
-                setShowCase={setShowCase}
+                showCaseDispatch={dispatch}
               />
             </div>
           ))}
