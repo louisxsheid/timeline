@@ -38,18 +38,6 @@ const DatesPicker = ({
     });
   }, [value]);
 
-  // const handleDateRange = (direction) => {
-  //   switch (direction) {
-  //     case "add":
-  //       setDateRange((prev) => ({
-  //         start: dayjs(prev.start)
-  //           .add(1, selectedInterval)
-  //           .format("MM/DD/YYYY"),
-  //         end: dayjs(prev.end).add(1, selectedInterval).format("MM/DD/YYYY"),
-  //       }));
-  //   }
-  // };
-
   return (
     <div>
       <div className="date-range">

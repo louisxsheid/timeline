@@ -22,29 +22,27 @@ const TimelinePage = ({ allData }) => {
   const [dates, setDates] = useState([]);
 
   useEffect(() => {
-    if (selectedInterval == "week") {
-      setDateRange({
-        start: dayjs().weekday(0).format("MM/DD/YYYY"),
-        end: dayjs().weekday(6).format("MM/DD/YYYY"),
-      });
-    } else if (selectedInterval == "month") {
-      setDateRange({
-        start: dayjs().startOf("month").format("MM/DD/YYYY"),
-        end: dayjs().endOf("month").format("MM/DD/YYYY"),
-      });
-    }
+    switch(selectedInterval) {
+      case "week":
+        setDateRange({
+          start: dayjs().weekday(0).format("MM/DD/YYYY"),
+          end: dayjs().weekday(6).format("MM/DD/YYYY"),
+        });
+        break;
+      case "month": 
+        setDateRange({
+          start: dayjs().startOf("month").format("MM/DD/YYYY"),
+          end: dayjs().endOf("month").format("MM/DD/YYYY"),
+        });
+        break;
+      }
   }, [selectedInterval]);
 
   useEffect(() => {
     let tempDates = [];
     const daysBetweenDates = selectedInterval == "week" ? 6 : 30;
-    // const daysBetweenDates = dayjs(dateRange.end).diff(
-    //   dayjs(dateRange.start),
-    //   "day"
-    // );
-    console.log(typeof daysBetweenDates);
+;
     for (let i = 0; i < daysBetweenDates + 1; i++) {
-      console.log(dateRange.start);
       tempDates.push(dayjs(dateRange.start).add(i, "day").format("MM/DD/YYYY"));
     }
     setDates(tempDates);
@@ -53,7 +51,7 @@ const TimelinePage = ({ allData }) => {
   useEffect(() => {
     let temp = [];
     switch (showCase.type) {
-      case 0:
+      case "date":
         for (let context of allData) {
           for (let data of context.data) {
             if (data.date == showCase.data) {
@@ -62,14 +60,14 @@ const TimelinePage = ({ allData }) => {
           }
         }
         break;
-      case 1:
+      case "context":
         for (let context of allData) {
           if (context.context == showCase.data) {
             temp.push(context);
           }
         }
         break;
-      case 2:
+      case "with-data":
         for (let context of allData) {
           for (let data of context.data) {
             if (data.name == showCase.data) {
@@ -78,7 +76,7 @@ const TimelinePage = ({ allData }) => {
           }
         }
         break;
-      case 3:
+      case "no-data":
         setDateData("no data");
         break;
     }
@@ -100,7 +98,7 @@ const TimelinePage = ({ allData }) => {
           />
           {dates.map((item) => (
             <div
-              onClick={() => setShowCase({ type: 0, data: item })}
+              onClick={() => setShowCase({ type: "date", data: item })}
               key={item}
             >
               {dates.length < 28 ? (
@@ -113,10 +111,7 @@ const TimelinePage = ({ allData }) => {
         </div>
         <div className="context-rows-wrapper">
           {allData.map((item) => (
-            <div
-              // onClick={() => setShowCase({ type: 1, data: item.context })}
-              key={item.context}
-            >
+            <div key={item.context}>
               <ContextRow
                 selectedInterval={selectedInterval}
                 dates={dates}

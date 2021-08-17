@@ -36,7 +36,7 @@ const ContextRow = ({
           temp.push(
             <div
               onClick={() =>
-                setShowCase({ type: 2, data: contextData[j].name })
+                setShowCase({ type: "with-data", data: contextData[j].name })
               }
               className="item-context-wrapper"
               key={contextData[j].name}
@@ -62,7 +62,7 @@ const ContextRow = ({
               style={{ width: itemWidth }}
               key={i}
               onClick={() =>
-                setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
+                setShowCase({ type: "no-data", data: `${contextName} ${dates[i]}` })
               }
             >
               <hr style={{ width: itemWidth }} />
@@ -72,7 +72,7 @@ const ContextRow = ({
           temp.push(
             <div
               onClick={() =>
-                setShowCase({ type: 3, data: `${contextName} ${dates[i]}` })
+                setShowCase({ type: "no-data", data: `${contextName} ${dates[i]}` })
               }
               className="nodata"
               style={{ width: itemWidth }}
@@ -88,7 +88,7 @@ const ContextRow = ({
     <div className="context-bar-wrapper">
       <div
         className="context-name"
-        onClick={() => setShowCase({ type: 1, data: contextName })}
+        onClick={() => setShowCase({ type: "context", data: contextName })}
       >
         {contextName}
       </div>
