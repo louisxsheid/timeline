@@ -41,7 +41,7 @@ const DatesPicker = ({
   return (
     <div>
       <div className="date-range">
-        <div onClick={() => setIsOpen(true)} style={{ textAlign: "center" }}>
+        <div style={{ textAlign: "center" }}>
           {selectedInterval == "week" ? (
             `${dateRange.start} - ${dateRange.end}`
           ) : (

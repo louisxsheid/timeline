@@ -1,18 +1,15 @@
+import { useState } from "react";
 import "./DataShowCase.scss";
+import Modal from "../../../components/Modal/Modal";
+import DataItem from "./DataItem";
 
 const DataShowCase = ({ showCase }) => {
-  console.log(showCase);
+
   return (
     <div className="datashowcase-wrapper">
       <div className="title">SPOTLIGHT</div>
-      {/* <pre>{JSON.stringify(showCase.data, null, 2)}</pre> */}
       {showCase.header}
-      {showCase.data.map((item) => (
-        <div className="showcase-item">
-          <div>{item.name}</div>
-          <div>{item.date}</div>
-        </div>
-      ))}
+      {showCase.data.map((item) => <DataItem name={item.name} context={item.context} date={item.date}/> )}
     </div>
   );
 };

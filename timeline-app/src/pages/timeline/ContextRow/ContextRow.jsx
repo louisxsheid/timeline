@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./ContextRow.scss";
 import dayjs from "dayjs";
+import BlockWithData from "./BlockWithData";
+import BlockWithNoData from "./BlockWithNoData";
 
 const ContextRow = ({
   contextData,
@@ -11,6 +13,15 @@ const ContextRow = ({
 }) => {
   const [dataRows, setDataRows] = useState([]);
   const [itemWidth, setItemWidth] = useState("");
+
+  const [isHovering, setIsHovering] = useState(false);
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
 
   useEffect(() => {
     switch (selectedInterval) {
@@ -34,22 +45,14 @@ const ContextRow = ({
         if (dates[i] == contextData[j].date) {
           dataIsFilled = true;
           temp.push(
-            <div
-              onClick={() =>
-                showCaseDispatch({
-                  type: "with-data",
-                  payload: contextData[j].name,
-                })
-              }
-              className="item-context-wrapper"
-              key={contextData[j].name}
-              style={{ width: itemWidth }}
-            >
-              <div className="item-name" key={contextData[j].name}>
-                {selectedInterval == "week" && contextData[j].name}
-              </div>
-              {/* <div key={j}>{contextData[j].date}</div> */}
-            </div>
+            <BlockWithData
+              contextData={contextData[j]}
+              contextName={contextData[j].name}
+              showCaseDispatch={showCaseDispatch}
+              selectedInterval={selectedInterval}
+              itemWidth={itemWidth}
+              isHovering={isHovering}
+            />
           );
           dateFound = true;
         }
@@ -60,39 +63,30 @@ const ContextRow = ({
           dayjs(contextData[contextData.length - 1].date).isAfter(dates[i])
         ) {
           temp.push(
-            <div
-              className="nodata"
-              style={{ width: itemWidth }}
-              key={i}
-              onClick={() =>
-                showCaseDispatch({
-                  type: "no-data",
-                  payload: `${contextName} ${dates[i]}`,
-                })
-              }
+            <BlockWithNoData
+              contextName={contextName}
+              date={dates[i]}
+              showCaseDispatch={showCaseDispatch}
+              itemWidth={itemWidth}
             >
               <hr style={{ width: itemWidth }} />
-            </div>
+            </BlockWithNoData>
           );
         } else if (!dateFound) {
           temp.push(
-            <div
-              onClick={() =>
-                showCaseDispatch({
-                  type: "no-data",
-                  payload: `${contextName} ${dates[i]}`,
-                })
-              }
-              className="nodata"
-              style={{ width: itemWidth }}
-              key={i}
-            ></div>
+            <BlockWithNoData
+              contextName={contextName}
+              date={dates[i]}
+              showCaseDispatch={showCaseDispatch}
+              itemWidth={itemWidth}
+            />
           );
         }
       }
     }
     setDataRows(temp);
   }, [dates]);
+
   return (
     <div className="context-bar-wrapper">
       <div
@@ -109,8 +103,3 @@ const ContextRow = ({
 };
 
 export default ContextRow;
-{
-  /* <div style={{ fontSize: "1rem" }}>
-    first entry: {contextData[0].date}
-  </div> */
-}

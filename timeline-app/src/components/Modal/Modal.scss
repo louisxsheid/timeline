@@ -20,16 +20,33 @@ a {
 }
 
 
-.dropdown {
+.modal {
     position: absolute;
-    width: 12rem;
-    background-color: var(--bg);
-    border: var(--border);
-    border-radius: var(--border-radius);
-    padding: 1rem;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background-color: rgba(0,0,0,25%);
     overflow: hidden;
     font-size: 1.5rem;
     animation: fadeIn 125ms;
+    z-index: 9999;
+    // display: block;
+}
+
+.inner {
+    background-color: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    width: 25rem;
+    height: 20rem;
+    opacity: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    // margin: auto;
+    // margin-top: 15%;
+    padding-top: 1rem;
+    margin-top: 15rem;
 }
 
 .menu-item {
@@ -60,3 +77,4 @@ a {
       // top: 0px;
     }
   }
+

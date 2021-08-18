@@ -1,6 +1,8 @@
 import "./DropDown.scss";
+import onClickOutside from "react-onclickoutside";
 
-const DropDown = ({ setOpen, state, setState, options }) => {
+const DropDown = ({ setOpen, setState, options }) => {
+  DropDown.handleClickOutside = () => setOpen(false);
   const DropdownItem = (props) => {
     return (
       <a
@@ -25,4 +27,8 @@ const DropDown = ({ setOpen, state, setState, options }) => {
   );
 };
 
-export default DropDown;
+const clickOutsideConfig = {
+  handleClickOutside: () => DropDown.handleClickOutside,
+};
+
+export default onClickOutside(DropDown, clickOutsideConfig);

@@ -25,17 +25,19 @@
     display: flex;
     flex-direction: column;
     width: var(--item-width);
+    height: 100%;
     // width:fit-content;i
     border-right: 1px solid gray;
     background-color: darkred;
     cursor: pointer;
     transition: background 250ms;
-    .item-name {
-        font-size: 1.5rem;
-        margin: auto;
-    }
 }
 
+.item-name {
+    // position: relative;
+    font-size: 1.5rem;
+    margin: auto;
+}
 
 
 .item-context-wrapper:hover {
@@ -53,9 +55,21 @@ hr {
     border-left: 1px solid gray;
     width: var(--item-width);
     transition: background 250ms;
+    // position: relative;
 }
 
 .nodata:hover {
     background-color: #aaa;
     cursor: pointer;
+}
+
+.edit-block {
+    position: absolute;
+    // left: -1.5rem;
+    // top: -1.23rem;
+}
+
+
+.modal-info {
+    padding-left: 2rem;
 }

@@ -17,4 +17,10 @@
     border: 1px solid black;
     width: 10vw;
     background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-info {
+    color: white;
 }
