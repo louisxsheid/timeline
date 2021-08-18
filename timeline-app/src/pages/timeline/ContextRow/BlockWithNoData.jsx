@@ -29,15 +29,15 @@ const BlockWithNoData = (props) => {
       onMouseOver={!open ? handleMouseOver : null}
       onMouseOut={handleMouseOut}
     >
-      <button
+      <div
         className="edit-block"
         onClick={() => {
           setOpen(true);
         }}
         style={style}
       >
-        EDIT
-      </button>
+        ✎
+      </div>
       {props.children}
       {open && (
         <Modal setOpen={setOpen} setStyle={setStyle}>

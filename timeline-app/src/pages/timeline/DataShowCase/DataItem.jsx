@@ -11,7 +11,7 @@ const DataItem = (props) => {
               <div>{name}</div>
               <div>{date}</div>
             </div>
-            <button onClick={() => setOpen(true)}>EDIT</button>
+            <div className="edit-item" onClick={() => setOpen(true)}>✎</div>
           </div>
           {open && (
             <Modal setOpen={setOpen}>

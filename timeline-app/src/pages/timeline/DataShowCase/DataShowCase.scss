@@ -24,3 +24,16 @@
 .modal-info {
     color: white;
 }
+
+.edit-item {
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    background-color: lightgray;
+    cursor: pointer;
+    border-radius: 10%;
+}
+
+.edit-item:hover {
+    background-color: grey;
+}

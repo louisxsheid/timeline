@@ -1,5 +1,6 @@
 :root {
     --item-width: 2.3rem;
+    --bg-accent: #484a4d;
 }
 
 .context-bar-wrapper {
@@ -67,6 +68,17 @@ hr {
     position: absolute;
     // left: -1.5rem;
     // top: -1.23rem;
+    margin: 0.25rem;
+    background-color: lightgrey;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 10%;
+    color: var(--bg);
+    transition: background 150ms;
+}
+.edit-block:hover {
+    background-color: gray;
 }
 
 
