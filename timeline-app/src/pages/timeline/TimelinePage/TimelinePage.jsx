@@ -6,12 +6,31 @@ import WeeklyDatesRow from "../DatesRow/WeeklyDatesRow";
 import MonthlyDatesRow from "../DatesRow/MonthlyDatesRow";
 import DataShowCase from "../DataShowCase/DataShowCase";
 import DatesPicker from "../DatesPicker/DatesPicker";
-
+import DropDown from "../../../components/Dropdown/DropDown";
+const axios = require('axios').default;
 import dayjs from "dayjs";
+import Modal from "../../../components/Modal/Modal";
 const weekday = require("dayjs/plugin/weekday");
 dayjs.extend(weekday);
 
 const TimelinePage = ({ allData }) => {
+  const [open, setOpen] = useState(false);
+  const [newContextName, setNewContextName] = useState("");
+
+  const handleAddContext = () => {
+    console.log("IN HANDLE")
+    axios.post("http://localhost:3000/contexts", {
+      name: newContextName,
+      events: [],
+      date: Date.now()
+    }).then(function (response) {
+    console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  };
+
   const showCaseReducer = (state, action) => {
     let temp = [];
     switch (action.type) {
@@ -85,6 +104,10 @@ const TimelinePage = ({ allData }) => {
     setDates(tempDates);
   }, [dateRange]);
 
+  useEffect(() => {
+    console.log(newContextName)
+  }, [newContextName])
+
   return (
     <div style={{ display: "flex" }}>
       <DataShowCase showCase={showCase} />
@@ -123,6 +146,19 @@ const TimelinePage = ({ allData }) => {
               />
             </div>
           ))}
+          <div 
+            className="add-context"
+            onClick={() => setOpen(true)}
+            >+</div>
+            {open && (
+              <Modal setOpen={setOpen} > 
+                <div style={{color: "white"}}>add new context</div>
+                <div>
+                name:
+                  <input onChange={e => setNewContextName(e.target.value)}></input> 
+                </div>
+                <button onClick={() => handleAddContext()}>add</button>
+              </Modal>)}
         </div>
       </div>
     </div>

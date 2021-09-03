@@ -34,3 +34,17 @@
 .arrow:hover {
     color: gray;
 }
+
+.add-context {
+    font-size: 2.5rem;
+    text-align: center;
+    width: 15rem;
+    height: 4rem;
+    background-color: white;
+    cursor: pointer;
+    border: 1px solid gray;
+}
+
+.add-context:hover {
+    background-color: whitesmoke;
+}

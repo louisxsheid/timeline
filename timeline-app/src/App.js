@@ -3,8 +3,25 @@ import "./App.scss";
 import { HomePage, TimelinePage } from "./pages/index";
 import allData from "./pages/timeline/mock-data";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+const axios = require('axios').default;
 
 const App = () => {
+  const [fetchedData, setFetchedData] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/events")
+    .then((res) => {
+      setFetchedData(res.data);
+    })
+    .catch((error) => {
+    console.log(error);
+  })
+  }, []);
+
+  useEffect(() => {
+    console.log("fetchedData ",fetchedData)
+  }, [fetchedData]);
+
   return (
     <div className="app-wrapper">
       {/* <SideBar /> */}

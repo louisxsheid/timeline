@@ -14,15 +14,6 @@ const ContextRow = ({
   const [dataRows, setDataRows] = useState([]);
   const [itemWidth, setItemWidth] = useState("");
 
-  const [isHovering, setIsHovering] = useState(false);
-  const handleMouseOver = () => {
-    setIsHovering(true);
-  };
-
-  const handleMouseOut = () => {
-    setIsHovering(false);
-  };
-
   useEffect(() => {
     switch (selectedInterval) {
       case "week":
@@ -51,7 +42,7 @@ const ContextRow = ({
               showCaseDispatch={showCaseDispatch}
               selectedInterval={selectedInterval}
               itemWidth={itemWidth}
-              isHovering={isHovering}
+              // isHovering={isHovering}
             />
           );
           dateFound = true;
