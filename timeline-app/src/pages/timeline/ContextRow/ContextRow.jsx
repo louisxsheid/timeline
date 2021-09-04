@@ -15,6 +15,7 @@ const ContextRow = ({
   const [itemWidth, setItemWidth] = useState("");
 
   useEffect(() => {
+    console.log(selectedInterval);
     switch (selectedInterval) {
       case "week":
         setItemWidth("10.18rem");
@@ -33,12 +34,13 @@ const ContextRow = ({
       dateFound = false;
       dataIsFilled = false;
       for (let j in contextData) {
-        if (dates[i] == contextData[j].date) {
+        if (dates[i] == dayjs(contextData[j].date).format("MM/DD/YYYY")) {
+          console.log("CONTEXTDATA", contextData)
           dataIsFilled = true;
           temp.push(
             <BlockWithData
               contextData={contextData[j]}
-              contextName={contextData[j].name}
+              contextName={contextData[j].title}
               showCaseDispatch={showCaseDispatch}
               selectedInterval={selectedInterval}
               itemWidth={itemWidth}
@@ -50,7 +52,7 @@ const ContextRow = ({
       }
       if (!dataIsFilled) {
         if (
-          dayjs(contextData[0].date).isBefore(dates[i]) &&
+          contextData[0] && dayjs(contextData[0].date).isBefore(dates[i]) &&
           dayjs(contextData[contextData.length - 1].date).isAfter(dates[i])
         ) {
           temp.push(

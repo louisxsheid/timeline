@@ -13,7 +13,7 @@ import Modal from "../../../components/Modal/Modal";
 const weekday = require("dayjs/plugin/weekday");
 dayjs.extend(weekday);
 
-const TimelinePage = ({ allData }) => {
+const TimelinePage = ({ allData, setFetchedData }) => {
   const [open, setOpen] = useState(false);
   const [newContextName, setNewContextName] = useState("");
 
@@ -24,7 +24,10 @@ const TimelinePage = ({ allData }) => {
       events: [],
       date: Date.now()
     }).then(function (response) {
-    console.log(response);
+    console.log("RESPOSNE",response);
+      let fetchedDataCopy = allData;
+      fetchedDataCopy.push(response);
+      setFetchedData(fetchedDataCopy);
     })
     .catch(function (error) {
       console.log(error);
@@ -36,7 +39,7 @@ const TimelinePage = ({ allData }) => {
     switch (action.type) {
       case "date":
         for (let context of allData) {
-          for (let data of context.data) {
+          for (let data of context.events) {
             if (data.date == action.payload) {
               temp.push(data);
             }
@@ -45,14 +48,14 @@ const TimelinePage = ({ allData }) => {
         return { header: action.payload, data: temp.length ? temp : [] };
       case "context":
         for (let context of allData) {
-          if (context.context == action.payload) {
-            temp.push(...context.data);
+          if (context.name == action.payload) {
+            temp.push(...context.events);
           }
         }
         return { header: action.payload, data: temp.length ? temp : [] };
       case "with-data":
         for (let context of allData) {
-          for (let data of context.data) {
+          for (let data of context.events) {
             if (data.name == action.payload) {
               temp.push(data);
             }
@@ -136,12 +139,12 @@ const TimelinePage = ({ allData }) => {
         </div>
         <div className="context-rows-wrapper">
           {allData.map((item) => (
-            <div key={item.context}>
+            <div key={item.name}>
               <ContextRow
                 selectedInterval={selectedInterval}
                 dates={dates}
-                contextData={item.data}
-                contextName={item.context}
+                contextData={item.events}
+                contextName={item.name}
                 showCaseDispatch={dispatch}
               />
             </div>

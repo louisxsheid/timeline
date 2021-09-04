@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import Modal from '../../../components/Modal/Modal';
+import dayjs from 'dayjs';
 
 const DataItem = (props) => {
-    const { name, context, date } = props;
+    const { name, date } = props;
     const [open, setOpen] = useState(false);
     return (
         <div>
@@ -17,8 +18,8 @@ const DataItem = (props) => {
             <Modal setOpen={setOpen}>
               <div className="modal-info">
                 <div>Name: {name}</div>
-                <div>Context: {context}</div>
-                <div>Date: {date}</div>
+                {/* <div>Context: {context}</div> */}
+                <div>Date: {dayjs(date).format("MM/DD/YYYY")}</div>
               </div>
             </Modal>
           )}

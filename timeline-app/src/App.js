@@ -9,7 +9,7 @@ const axios = require('axios').default;
 const App = () => {
   const [fetchedData, setFetchedData] = useState([]);
   useEffect(() => {
-    axios.get("http://localhost:3000/events")
+    axios.get("http://localhost:3000/contexts")
     .then((res) => {
       setFetchedData(res.data);
     })
@@ -44,10 +44,10 @@ const App = () => {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/">
-              <HomePage allData={allData} />
+              <HomePage allData={fetchedData} />
             </Route>
             <Route path="/calendar">
-              <TimelinePage allData={allData} />
+              <TimelinePage allData={fetchedData} setFetchedData={setFetchedData}/>
             </Route>
           </Switch>
         </div>

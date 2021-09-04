@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useContextMenu from "../../../hooks/useContextMenu";
 import Modal from "../../../components/Modal/Modal";
+import dayjs from "dayjs";
 
 const BlockWithData = (props) => {
   const [open, setOpen] = useState(false);
@@ -48,9 +49,9 @@ const BlockWithData = (props) => {
       {open && (
         <Modal setOpen={setOpen} setStyle={setStyle}>
           <div className="modal-info">
-            <div>Name: {contextData.name}</div>
-            <div>Context: {contextData.context}</div>
-            <div>Date: {contextData.date}</div>
+            <div>Name: {contextData.title}</div>
+            {/* <div>Context: {contextData.context}</div> */}
+            <div>Date: {dayjs(contextData.date).format("MM/DD/YYYY")}</div>
           </div>
         </Modal>
       )}

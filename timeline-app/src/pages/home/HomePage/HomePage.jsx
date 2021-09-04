@@ -13,7 +13,7 @@ const HomePage = ({ allData }) => {
         <AllData allData={allData} />
       </div>
       <div className="progress">
-        <Progress allData={allData} />
+        {/* <Progress allData={allData} /> */}
       </div>
     </div>
   );
